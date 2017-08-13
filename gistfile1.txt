@@ -1,0 +1,78 @@
+//
+//  ViewController.swift
+//  re-TRY_kadai06
+//
+//  Created by a.t on 2015/09/24.
+//  Copyright (c) 2015年 a.t All rights reserved.
+//
+
+import UIKit
+
+class ViewController: UIViewController {
+    
+    
+    //ラベルのプロパティー
+    @IBOutlet weak var numLabel: UILabel!
+    
+    //スライダーのプロパティー
+    @IBOutlet weak var numSlider: UISlider!
+    
+    
+    
+
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        //乱数の発生と表示
+        var num = arc4random_uniform(100)
+        self.numLabel.text = "\(num)"
+        
+    }
+    
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+        
+    }
+    //スライダーの値が変わった時のアクション
+    @IBAction func valueChanged(sender: AnyObject) {
+        
+    }
+    
+    //判定ボタンが押下されたときのアクション
+    @IBAction func buttonPushed(sender: AnyObject) {
+        var num2 = self.numSlider.value
+        var num3 = NSString  (format: "%.0f", num2) as  String
+        
+        
+        if numLabel.text == num3 {
+            print("OK")
+            showAlert("結果", message: "アタリ！\nあなたの値は\(num3)")
+        }else{
+            print("NO")
+            showAlert("結果", message: "ハズレ\nあなたの値は\(num3)")
+        }
+        
+        
+        
+    }
+    
+    //アラートのメソッド
+    func showAlert(title:String,message:String){
+        
+        //アラートを作成
+        let alert = UIAlertController(title: title, message: message, preferredStyle: .Alert)
+        
+        //ボタンを作成
+        let reTryButton = UIAlertAction(title: "再挑戦", style: .Default, handler: nil)
+        alert.addAction(reTryButton)
+        
+        // アラートを表示
+        presentViewController(alert, animated: true, completion: nil)
+        
+        
+        
+    }
+    
+}
+
